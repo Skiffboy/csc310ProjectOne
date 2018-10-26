@@ -1,5 +1,5 @@
 # csc310ProjectOne
 
-Included:
-Radix Sort
-Postfix expression solver
+#### Included:
+##### Radix Sort
+##### Postfix expression solver
