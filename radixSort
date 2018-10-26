@@ -1,0 +1,69 @@
+package csc310projectmikanelson;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class CSC310projectMikaNelson {
+    
+    public static void main(String[] args) {
+        // initialization
+        
+        Scanner in = new Scanner(System.in);
+        Queue temp = new LinkedList();
+        Queue toSort = new LinkedList();
+        int max = 0;
+        
+        // add to queue
+        System.out.println("Enter anything that is not a number to exit.");
+        String input = "";
+        while (!input.equals("placeholder")) {
+            try {
+                System.out.print("Enter a number to be added to the queue: ");
+                input = in.nextLine();
+                toSort.add(Integer.parseInt(input));
+                if (Integer.parseInt(input) > max) {
+                    max = Integer.parseInt(input);
+                }
+            } catch (Exception e) {
+                break;
+            }           
+        }
+        int size = toSort.size();
+        
+        // exit if they don't give us any numbers
+        if (toSort.isEmpty()) {
+            System.out.println("Queue is empty... Exiting.");
+            System.exit(1);
+        }
+        
+        // get digits in the max number
+        int count = 0;
+        while (max > 0) {
+            max /= 10;
+            count++;
+        }       
+        
+        //sort
+        for (int i = 0; i < count; i++) {
+            for (int j = 9; j > -1; j--) {
+                for (int k = 0; k < size; k++) {
+                    if ((int)((int)toSort.peek() / Math.pow(10, i)) % 10 == j) {
+                        toSort.add(toSort.remove());
+                    } else {
+                        temp.add(toSort.remove());
+                    }
+                }
+                while (!temp.isEmpty()) {
+                    toSort.add(temp.remove());
+                }
+            }
+        }
+        
+        // print queue
+        for (int i = 0; i < size; i++) {
+            System.out.println(toSort.remove());
+        }       
+    }    
+    
+}
